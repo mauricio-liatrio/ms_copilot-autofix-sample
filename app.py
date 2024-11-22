@@ -4,7 +4,7 @@ import sqlite3
 app = Flask(__name__)
 DATABASE = 'sample.db'
 
-# データベース接続を管理する関数
+#
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -17,7 +17,7 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-# データベース初期化用エンドポイント（本番では不要）
+# 
 @app.route('/init')
 def init_db():
     db = get_db()
@@ -30,12 +30,12 @@ def init_db():
             password TEXT
         )
     ''')
-    # サンプルデータを挿入
+    # 
     cursor.execute("INSERT INTO users (username, password) VALUES ('admin', 'password123')")
     db.commit()
     return "Database initialized!"
 
-# ログイン処理
+#
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
